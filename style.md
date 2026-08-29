@@ -137,6 +137,7 @@ Simple workspace patterns:
 - Tool panels start with a search field and task filters: Terrain, World, Labels, Decorations, and Analysis.
 - Filters narrow the existing controls without removing the Advanced workflow or changing the generator APIs.
 - Layer lists use one-time group headings, visible search, and semantic pressed states for keyboard users.
+- Layer visibility offers reversible “Show only selected” and “Show all” actions next to the search field.
 - Keep the original layer order when grouping is only a visual aid; drag-and-drop ordering remains authoritative.
 
 ## Navigation and terminology

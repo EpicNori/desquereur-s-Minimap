@@ -1525,6 +1525,30 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   font-family: var(--sans-serif) !important;
 }
 
+.simple-layer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 0.45em;
+}
+
+.simple-layer-actions button {
+  padding: 0.3em 0.65em;
+  color: var(--simple-accent-hover, #245a82);
+  background: var(--simple-surface-muted, #f4f7fa);
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 5px;
+  font-family: var(--sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.simple-layer-actions button:hover,
+.simple-layer-actions button:focus-visible {
+  background: #e6f1f8;
+  border-color: #8fb8d3;
+}
+
 @media (max-width: 640px) {
   .simple-style-presets {
     grid-template-columns: repeat(2, minmax(0, 1fr));

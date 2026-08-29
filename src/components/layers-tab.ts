@@ -128,6 +128,7 @@ function render(): void {
 ensureEl("mapLayers").addEventListener("click", event => {
   const id = (event.target as HTMLElement).closest("li")?.dataset.layer;
   if (!id || !Layers.has(id)) return;
+  ensureEl("mapLayers").dataset.activeLayer = id;
 
   if (isCtrlClick(event)) return void editStyle(Layers.get(id).elementId);
   Layers.toggle(id);

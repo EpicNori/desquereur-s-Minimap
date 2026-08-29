@@ -1,4 +1,5 @@
 import { ensureEl, findEl } from "@/utils";
+import { Layers } from "@/components/layers";
 
 type LegacyTabId = "optionsTab" | "toolsTab" | "layersTab" | "styleTab" | "aboutTab";
 type SimpleSection = "create" | "edit" | "layers" | "style" | "save-export";
@@ -122,6 +123,29 @@ function initializeExportChoices(): void {
       details.open = true;
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  });
+}
+
+function initializeLayerVisibilityActions(): void {
+  findEl<HTMLButtonElement>("simpleShowOnlyLayer")?.addEventListener("click", () => {
+    const mapLayers = findEl<HTMLElement>("mapLayers");
+    const activeLayer = mapLayers?.dataset.activeLayer;
+    if (!activeLayer || !Layers.has(activeLayer)) {
+      announce("Select a layer first");
+      return;
+    }
+    Layers.all.forEach(layer => {
+      const shouldBeOn = layer.id === activeLayer;
+      if (Layers.isOn(layer.id) !== shouldBeOn) Layers.toggle(layer.id);
+    });
+    announce("Showing only the selected layer");
+  });
+
+  findEl<HTMLButtonElement>("simpleShowAllLayers")?.addEventListener("click", () => {
+    Layers.all.forEach(layer => {
+      if (!Layers.isOn(layer.id)) Layers.toggle(layer.id);
+    });
+    announce("All layers shown");
   });
 }
 
@@ -447,6 +471,7 @@ function initialize(): void {
   initializeToolFilters();
   initializeStylePresets();
   initializeExportChoices();
+  initializeLayerVisibilityActions();
 
   ensureEl("simpleToolbar").addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
