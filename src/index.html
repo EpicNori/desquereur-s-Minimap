@@ -2438,7 +2438,19 @@
         </div>
       </div>
       <div id="exportMapData" style="display: none" class="dialog">
-        <div style="margin-bottom: 0.3em; font-weight: bold">Download image</div>
+        <div class="simple-export-intro">
+          <p class="simple-eyebrow">Save &amp; Export</p>
+          <h3>What do you want to take with you?</h3>
+          <p class="simple-help-text">Choose an image for sharing, map data for other tools, or a project file you can reopen later.</p>
+          <div class="simple-export-choices" role="group" aria-label="Export types">
+            <button type="button" data-simple-export-target="simpleExportImageHeading"><strong>Image</strong><span>Share a picture of the map</span></button>
+            <button type="button" data-simple-export-target="simpleExportGeoJsonHeading"><strong>Map data</strong><span>Use the map in GIS tools</span></button>
+            <button type="button" data-simple-export-target="simpleExportJsonHeading"><strong>Project data</strong><span>Keep machine-readable data</span></button>
+          </div>
+        </div>
+        <details class="simple-advanced-export">
+          <summary>More export formats and options</summary>
+        <div id="simpleExportImageHeading" style="margin-bottom: 0.3em; font-weight: bold">Download image</div>
         <div>
           <button
             onclick="window.Services.ExportMap.exportToSvg()"
@@ -2492,7 +2504,7 @@
           <input id="pngResolutionOutput" data-stored="pngResolution" type="number" min="1" max="8" value="1" />
         </div>
         <p>Generator uses pop-up window to download files. Please ensure your browser does not block popups.</p>
-        <div style="margin: 1em 0 0.3em; font-weight: bold">Export to GeoJSON</div>
+        <div id="simpleExportGeoJsonHeading" style="margin: 1em 0 0.3em; font-weight: bold">Export to GeoJSON</div>
         <div>
           <button onclick="window.Services.ExportMap.saveGeoJsonCells()" data-tip="Download cells data in GeoJSON format">cells</button>
           <button onclick="window.Services.ExportMap.saveGeoJsonRoutes()" data-tip="Download routes data in GeoJSON format">routes</button>
@@ -2505,7 +2517,7 @@
           <a href="https://github.com/Azgaar/Fantasy-Map-Generator/wiki/GIS-data-export" target="_blank">wiki-page</a>
           for guidance.
         </p>
-        <div style="margin: 1em 0 0.3em; font-weight: bold">Export To JSON</div>
+        <div id="simpleExportJsonHeading" style="margin: 1em 0 0.3em; font-weight: bold">Export To JSON</div>
         <div>
           <button onclick="exportToJson('Full')" data-tip="Download full data in JSON">full</button>
           <button onclick="exportToJson('Minimal')" data-tip="Download minimal data in JSON">minimal</button>
@@ -2517,8 +2529,14 @@
           </button>
         </div>
         <p>Export in JSON format can be used as an API replacement.</p>
+        </details>
       </div>
       <div id="saveMapData" style="display: none" class="dialog">
+        <div class="simple-dialog-intro">
+          <p class="simple-eyebrow">Save your work</p>
+          <h3>Keep a backup of your map</h3>
+          <p class="simple-help-text">The <i>.map</i> file is the editable project format. Keep a copy on your computer before making major changes.</p>
+        </div>
         <div style="margin-top: 0.3em">
           <strong>Save map to</strong>
           <button
@@ -2527,7 +2545,7 @@
             data-shortcut="Ctrl + S"
             style="font-weight: 600"
           >
-            machine
+            computer
           </button>
           <button
             id="saveToDropboxButton"
@@ -2538,7 +2556,7 @@
             dropbox
           </button>
           <button onclick="window.Services.Save.saveMap('storage')" data-tip="Save the project to browser storage only" data-shortcut="F6">
-            browser
+            browser backup
           </button>
         </div>
         <p>
@@ -2547,10 +2565,15 @@
         </p>
       </div>
       <div id="loadMapData" style="display: none" class="dialog">
+        <div class="simple-dialog-intro">
+          <p class="simple-eyebrow">Open a map</p>
+          <h3>Choose where your map lives</h3>
+          <p class="simple-help-text">Open an editable <i>.map</i> file from your computer, a URL, or a browser backup.</p>
+        </div>
         <div>
           <strong>Load map from</strong>
           <button onclick="mapToLoad.click()" data-tip="Load map file (.map or .gz) from your local disk">
-            machine
+            computer
           </button>
           <button
             onclick="loadURL()"
@@ -2558,7 +2581,7 @@
           >
             URL
           </button>
-          <button onclick="window.Services.Load.quickLoad()" data-tip="Load map from browser storage (if saved before)">storage</button>
+          <button onclick="window.Services.Load.quickLoad()" data-tip="Load map from browser storage (if saved before)">browser backup</button>
         </div>
         <p>Click on <i>storage</i> to open the last saved map.</p>
         <div id="loadFromDropbox">

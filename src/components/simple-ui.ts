@@ -112,6 +112,19 @@ function initializeStylePresets(): void {
   updateActive(select.value || "default");
 }
 
+function initializeExportChoices(): void {
+  document.querySelectorAll<HTMLButtonElement>("[data-simple-export-target]").forEach(button => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.simpleExportTarget;
+      const target = targetId ? findEl<HTMLElement>(targetId) : null;
+      const details = target?.closest<HTMLDetailsElement>("details");
+      if (!target || !details) return;
+      details.open = true;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
 function openLegacyTab(tabId: LegacyTabId): void {
   const options = findEl<HTMLElement>("options");
   const trigger = findEl<HTMLButtonElement>("optionsTrigger");
@@ -419,6 +432,7 @@ function initialize(): void {
 
   initializeToolFilters();
   initializeStylePresets();
+  initializeExportChoices();
 
   ensureEl("simpleToolbar").addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
