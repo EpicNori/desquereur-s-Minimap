@@ -356,6 +356,29 @@
       </div>
     </header>
     <div id="simpleUiStatus" class="simple-ui-status" role="status" aria-live="polite"></div>
+    <section id="simpleStartScreen" class="simple-start-screen" aria-labelledby="simpleStartTitle" hidden>
+      <div class="simple-start-card">
+        <p class="simple-eyebrow">Welcome to Map Maker</p>
+        <h1 id="simpleStartTitle">What would you like to do?</h1>
+        <p class="simple-start-intro">Start with a preset, open an existing map, or continue exploring the current world.</p>
+        <div class="simple-start-actions">
+          <button type="button" data-simple-start="create" class="simple-start-card-action simple-start-card-action-primary">
+            <strong>Create a new map</strong>
+            <span>Choose a starting style and world detail</span>
+          </button>
+          <button type="button" data-simple-start="open" class="simple-start-card-action">
+            <strong>Open a map</strong>
+            <span>Load a .map or .gz file from your device</span>
+          </button>
+          <button type="button" data-simple-start="continue" class="simple-start-card-action">
+            <strong>Continue to the map</strong>
+            <span>Keep working on the generated world</span>
+          </button>
+        </div>
+        <button type="button" data-simple-start="advanced" class="simple-start-advanced">Use advanced controls</button>
+      </div>
+    </section>
+    <section id="simpleCreateWizard" class="simple-wizard" aria-labelledby="simpleWizardTitle" hidden></section>
     <div id="loading">
       <svg width="100%" height="100%">
         <rect x="-1%" y="-1%" width="102%" height="102%" fill="#466eab" />

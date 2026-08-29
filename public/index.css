@@ -210,6 +210,299 @@ iframe {
   pointer-events: none;
 }
 
+.simple-start-screen,
+.simple-wizard {
+  position: fixed;
+  z-index: 280;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 96px 20px 32px;
+  box-sizing: border-box;
+  background: rgb(23 42 58 / 32%);
+  backdrop-filter: blur(3px);
+}
+
+.simple-start-screen[hidden],
+.simple-wizard[hidden] {
+  display: none;
+}
+
+.simple-start-card,
+.simple-wizard-card {
+  width: min(680px, 100%);
+  padding: 32px;
+  color: var(--simple-text);
+  background: var(--simple-surface);
+  border: 1px solid var(--simple-border);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgb(29 41 53 / 25%);
+  font-family: var(--sans-serif);
+}
+
+.simple-start-card h1,
+.simple-wizard-card h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+}
+
+.simple-eyebrow {
+  margin: 0 0 8px;
+  color: var(--simple-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.simple-start-intro,
+.simple-wizard-header p:not(.simple-eyebrow) {
+  margin: 8px 0 0;
+  color: var(--simple-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.simple-start-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.simple-start-card-action,
+.simple-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  min-height: 132px;
+  padding: 16px;
+  color: var(--simple-text);
+  text-align: left;
+  background: var(--simple-surface-muted);
+  border: 1px solid var(--simple-border);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.simple-start-card-action:hover,
+.simple-choice:hover,
+.simple-choice.selected {
+  border-color: var(--simple-accent);
+  box-shadow: 0 0 0 3px rgb(47 111 159 / 12%);
+}
+
+.simple-start-card-action-primary {
+  color: #ffffff;
+  background: var(--simple-accent);
+  border-color: var(--simple-accent);
+}
+
+.simple-start-card-action-primary:hover {
+  color: #ffffff;
+  background: var(--simple-accent-hover);
+}
+
+.simple-start-card-action strong,
+.simple-choice strong {
+  font-size: 0.95rem;
+}
+
+.simple-start-card-action span,
+.simple-choice span {
+  color: var(--simple-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.simple-start-card-action-primary span {
+  color: rgb(255 255 255 / 82%);
+}
+
+.simple-start-advanced {
+  display: block;
+  margin: 22px auto 0;
+  color: var(--simple-accent);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.simple-wizard-card {
+  width: min(720px, 100%);
+  padding: 0;
+  overflow: hidden;
+}
+
+.simple-wizard-header,
+.simple-wizard-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+}
+
+.simple-wizard-header {
+  border-bottom: 1px solid var(--simple-border);
+}
+
+.simple-close-button {
+  width: 40px;
+  height: 40px;
+  color: var(--simple-text-muted);
+  background: transparent;
+  border: 1px solid var(--simple-border);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.simple-wizard-progress {
+  display: grid;
+  gap: 8px;
+  padding: 16px 28px 0;
+  color: var(--simple-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.simple-wizard-progress > div {
+  height: 6px;
+  overflow: hidden;
+  background: var(--simple-surface-muted);
+  border-radius: 999px;
+}
+
+.simple-wizard-progress i {
+  display: block;
+  height: 100%;
+  background: var(--simple-accent);
+  border-radius: inherit;
+  transition: width 0.2s ease;
+}
+
+.simple-wizard-content {
+  min-height: 260px;
+  padding: 24px 28px;
+}
+
+.simple-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.simple-choice-grid-three .simple-choice {
+  min-height: 108px;
+}
+
+.simple-field-label,
+.simple-range-field label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 20px 0 8px;
+  color: var(--simple-text);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.simple-field-label span {
+  color: var(--simple-text-muted);
+  font-weight: 400;
+}
+
+.simple-field {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--simple-text);
+  background: #ffffff;
+  border: 1px solid var(--simple-border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.simple-range-field + .simple-range-field {
+  margin-top: 22px;
+}
+
+.simple-range-field input {
+  width: 100%;
+  accent-color: var(--simple-accent);
+}
+
+.simple-range-field output {
+  color: var(--simple-accent);
+  font-weight: 700;
+}
+
+.simple-help-text,
+.simple-summary {
+  color: var(--simple-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.simple-summary {
+  display: grid;
+  gap: 4px;
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: var(--simple-accent-soft, #e6f1f8);
+  border-radius: 8px;
+}
+
+.simple-summary strong {
+  color: var(--simple-text);
+}
+
+.simple-wizard-footer {
+  align-items: center;
+  justify-content: flex-end;
+  border-top: 1px solid var(--simple-border);
+}
+
+.simple-wizard-footer button {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+}
+
+.simple-wizard-footer button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 720px) {
+  .simple-start-actions,
+  .simple-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .simple-start-card,
+  .simple-wizard-header,
+  .simple-wizard-content,
+  .simple-wizard-footer {
+    padding: 20px;
+  }
+
+  .simple-start-card-action,
+  .simple-choice {
+    min-height: 0;
+  }
+}
+
 @media (max-width: 980px) {
   #simpleToolbar {
     gap: 8px;

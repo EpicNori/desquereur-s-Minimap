@@ -16,6 +16,11 @@ This baseline records the current interface before the simplification work. Scre
 6. [Current Tools panel](./06-current-tools-panel.png)
 7. [Current Export dialog](./07-current-export-dialog.png)
 8. [Simplified toolbar validation](./08-simple-toolbar.png)
+9. [Simplified start screen](./09-simple-start-screen.png)
+10. [Guided creation wizard — first step](./10-simple-create-step1.png)
+11. [Guided creation wizard — final step](./11-simple-create-wizard.png)
+12. [Generated result from guided creation](./12-simple-generated-map.png)
+13. [Generated result from Islands preset](./13-islands-preset-result.png)
 
 ## Inventory measurements
 
@@ -134,6 +139,9 @@ The new labeled toolbar renders above the existing map canvas and exposes Create
 - `npm run build`: passed
 - Browser smoke check: toolbar rendered and Layers navigation opened the existing Layers workflow
 - `npm test -- --run`: 419 tests passed; 7 failures remain in two pre-existing suites because the Node test environment exposes `localStorage` as undefined
+- Guided creation smoke check: start screen opened, wizard advanced through all four steps, and the final screen exposed a Generate map action
+- Guided generation smoke check: the wizard applied a custom map name and night style, generated a map through the existing generator, and closed cleanly
+- Islands preset smoke check: selecting Islands routed generation through the existing high-island template and produced an island-heavy result
 
 ## Baseline priorities
 
