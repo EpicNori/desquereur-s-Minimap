@@ -2,7 +2,7 @@ import { ensureEl, findEl } from "@/utils";
 
 type LegacyTabId = "optionsTab" | "toolsTab" | "layersTab" | "styleTab" | "aboutTab";
 type SimpleSection = "create" | "edit" | "layers" | "style" | "save-export";
-type SimpleAction = "open" | "save" | "new" | "help";
+type SimpleAction = "open" | "save" | "undo" | "redo" | "new" | "help";
 type SimpleStartAction = "create" | "open" | "continue" | "advanced";
 
 interface CreateWizardState {
@@ -170,12 +170,26 @@ function openSection(section: SimpleSection): void {
 function runAction(action: SimpleAction): void {
   if (action === "open") clickLegacyAction("loadButton");
   else if (action === "save") clickLegacyAction("saveButton");
+  else if (action === "undo" || action === "redo") {
+    const control = findEl<HTMLButtonElement>(action);
+    if (!control) {
+      announce(`${action === "undo" ? "Undo" : "Redo"} is available while editing terrain`);
+      return;
+    }
+    if (control.disabled) {
+      announce(`Nothing to ${action}`);
+      return;
+    }
+    control.click();
+  }
   else if (action === "new") openCreateWizard();
   else openLegacyTab("aboutTab");
 
   const labels: Record<SimpleAction, string> = {
     open: "Open map",
     save: "Save map",
+    undo: "Undo",
+    redo: "Redo",
     new: "Create map",
     help: "Help"
   };
