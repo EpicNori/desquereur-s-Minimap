@@ -15,6 +15,7 @@ This baseline records the current interface before the simplification work. Scre
 5. [Current Style panel](./05-current-style-panel.png)
 6. [Current Tools panel](./06-current-tools-panel.png)
 7. [Current Export dialog](./07-current-export-dialog.png)
+8. [Simplified toolbar validation](./08-simple-toolbar.png)
 
 ## Inventory measurements
 
@@ -122,6 +123,18 @@ Problems:
 
 Recommended change: separate “Export image” and “Export data”, then use a short format-and-preview flow.
 
+### Step 8 — Simplified toolbar validation
+
+Health: successful migration increment.
+
+The new labeled toolbar renders above the existing map canvas and exposes Create, Edit, Layers, Style, Save & Export, Open, Save, New map, and Help. Navigation buttons are keyboard-addressable and route into the existing workflows without changing the map-generation engine.
+
+## Implementation validation
+
+- `npm run build`: passed
+- Browser smoke check: toolbar rendered and Layers navigation opened the existing Layers workflow
+- `npm test -- --run`: 419 tests passed; 7 failures remain in two pre-existing suites because the Node test environment exposes `localStorage` as undefined
+
 ## Baseline priorities
 
 1. Add a clear start screen and persistent top bar.
@@ -143,4 +156,3 @@ This baseline measures the visible UI and DOM structure. It does not prove:
 - Compatibility with every historical `.map` file
 
 Those items require dedicated automated tests, device checks, and user testing in later phases.
-

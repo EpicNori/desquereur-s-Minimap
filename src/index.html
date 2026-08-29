@@ -336,6 +336,26 @@
         <rect id="scaleBarBack"></rect>
       </g>
     </svg>
+    <header id="simpleToolbar" class="simple-toolbar" aria-label="Map workspace">
+      <div class="simple-toolbar-brand">
+        <span class="simple-toolbar-title">Map Maker</span>
+        <span class="simple-toolbar-subtitle">Create, edit, and export fantasy maps</span>
+      </div>
+      <nav class="simple-toolbar-nav" aria-label="Primary navigation">
+        <button type="button" data-simple-section="create" aria-current="page">Create</button>
+        <button type="button" data-simple-section="edit">Edit</button>
+        <button type="button" data-simple-section="layers">Layers</button>
+        <button type="button" data-simple-section="style">Style</button>
+        <button type="button" data-simple-section="save-export">Save &amp; Export</button>
+      </nav>
+      <div class="simple-toolbar-actions" aria-label="Map actions">
+        <button type="button" class="simple-toolbar-secondary" data-simple-action="open">Open</button>
+        <button type="button" class="simple-toolbar-secondary" data-simple-action="save">Save</button>
+        <button type="button" class="simple-toolbar-primary" data-simple-action="new">New map</button>
+        <button type="button" class="simple-toolbar-help" data-simple-action="help">Help</button>
+      </div>
+    </header>
+    <div id="simpleUiStatus" class="simple-ui-status" role="status" aria-live="polite"></div>
     <div id="loading">
       <svg width="100%" height="100%">
         <rect x="-1%" y="-1%" width="102%" height="102%" fill="#466eab" />

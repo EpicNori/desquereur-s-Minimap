@@ -2,6 +2,15 @@
   --monospace: Consolas, monospace;
   --serif: Georgia, serif;
   --sans-serif: Helvetica, Arial, sans-serif;
+  --simple-canvas: #dce8f2;
+  --simple-surface: #ffffff;
+  --simple-surface-muted: #f4f7fa;
+  --simple-border: #c8d3df;
+  --simple-text: #1d2935;
+  --simple-text-muted: #5d6b78;
+  --simple-accent: #2f6f9f;
+  --simple-accent-hover: #245a83;
+  --simple-focus: #2f6f9f;
 }
 
 /* hide Google translate header */
@@ -78,6 +87,193 @@ iframe {
   mask-clip: no-clip;
   fill-rule: evenodd;
   user-select: none;
+}
+
+/* Simple Map Maker shell. Legacy panels remain available underneath as the migration surface. */
+#simpleToolbar {
+  position: fixed;
+  z-index: 300;
+  top: 12px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(1200px, calc(100vw - 24px));
+  min-height: 56px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  transform: translateX(-50%);
+  color: var(--simple-text);
+  background: rgb(255 255 255 / 92%);
+  border: 1px solid var(--simple-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgb(29 41 53 / 16%);
+  font-family: var(--sans-serif);
+  user-select: none;
+}
+
+.simple-toolbar-brand {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.simple-toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.simple-toolbar-subtitle {
+  margin-top: 2px;
+  color: var(--simple-text-muted);
+  font-size: 0.75rem;
+}
+
+.simple-toolbar-nav,
+.simple-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.simple-toolbar-nav {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+#simpleToolbar button {
+  min-height: 40px;
+  padding: 0 12px;
+  color: var(--simple-text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#simpleToolbar button:hover {
+  color: var(--simple-accent-hover);
+  background: var(--simple-surface-muted);
+}
+
+#simpleToolbar button:focus-visible {
+  outline: 3px solid var(--simple-focus);
+  outline-offset: 2px;
+}
+
+#simpleToolbar .simple-toolbar-nav button.active {
+  color: var(--simple-accent-hover);
+  background: #e6f1f8;
+  border-color: #b3d1e4;
+}
+
+#simpleToolbar .simple-toolbar-primary {
+  color: #ffffff;
+  background: var(--simple-accent);
+}
+
+#simpleToolbar .simple-toolbar-primary:hover {
+  color: #ffffff;
+  background: var(--simple-accent-hover);
+}
+
+#simpleToolbar .simple-toolbar-secondary {
+  background: var(--simple-surface-muted);
+  border-color: var(--simple-border);
+}
+
+#simpleToolbar .simple-toolbar-help {
+  padding-inline: 10px;
+  color: var(--simple-text-muted);
+}
+
+.simple-ui-status {
+  position: fixed;
+  z-index: 299;
+  top: 82px;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  min-height: 1.2em;
+  padding: 4px 10px;
+  transform: translateX(-50%);
+  color: var(--simple-text);
+  background: rgb(255 255 255 / 88%);
+  border-radius: 999px;
+  font-family: var(--sans-serif);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+@media (max-width: 980px) {
+  #simpleToolbar {
+    gap: 8px;
+  }
+
+  .simple-toolbar-brand {
+    min-width: 132px;
+  }
+
+  .simple-toolbar-subtitle {
+    display: none;
+  }
+
+  #simpleToolbar button {
+    padding-inline: 8px;
+  }
+}
+
+@media (max-width: 720px) {
+  #simpleToolbar {
+    align-items: stretch;
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+
+  .simple-toolbar-brand {
+    min-width: 0;
+  }
+
+  .simple-toolbar-nav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: stretch;
+    overflow-x: auto;
+  }
+
+  .simple-toolbar-nav button {
+    flex: 1 0 auto;
+  }
+
+  .simple-toolbar-actions {
+    margin-left: auto;
+  }
+
+  .simple-toolbar-actions .simple-toolbar-secondary {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  #simpleToolbar {
+    top: 6px;
+    width: calc(100vw - 12px);
+  }
+
+  .simple-toolbar-title {
+    font-size: 1.05rem;
+  }
+
+  #simpleToolbar button {
+    min-height: 40px;
+    padding-inline: 8px;
+    font-size: 0.8rem;
+  }
 }
 
 #canvas {
