@@ -10,6 +10,41 @@ interface LayerButton {
   hint?: string; // shortcut as shown in the tip, defaults to the code without the "Key" prefix
 }
 
+const LAYER_GROUPS: Record<string, string> = {
+  texture: "Terrain & climate",
+  heightmap: "Terrain & climate",
+  lakes: "Terrain & climate",
+  biomes: "Terrain & climate",
+  cells: "Terrain & climate",
+  grid: "Terrain & climate",
+  coordinates: "Terrain & climate",
+  compass: "Terrain & climate",
+  rivers: "Terrain & climate",
+  relief: "Terrain & climate",
+  temperature: "Terrain & climate",
+  ice: "Terrain & climate",
+  precipitation: "Terrain & climate",
+  religions: "World & politics",
+  cultures: "World & politics",
+  states: "World & politics",
+  provinces: "World & politics",
+  zones: "World & politics",
+  borders: "World & politics",
+  routes: "Settlements & trade",
+  goods: "Settlements & trade",
+  markets: "Settlements & trade",
+  trade: "Settlements & trade",
+  population: "Settlements & trade",
+  emblems: "Settlements & trade",
+  burgIcons: "Settlements & trade",
+  labels: "Settlements & trade",
+  military: "Settlements & trade",
+  markers: "Settlements & trade",
+  rulers: "Map frame",
+  scaleBar: "Map frame",
+  vignette: "Map frame"
+};
+
 // only layers listed here get a button, in registry order
 export const LAYER_TOGGLES = new Map<LayerId, LayerButton>([
   ["texture", { label: "Te<u>x</u>ture", shortcut: "KeyX" }],
@@ -50,21 +85,44 @@ export const getLayerByShortcut = (code: string): LayerId | undefined =>
   [...LAYER_TOGGLES].find(([, button]) => button.shortcut === code)?.[0];
 
 function render(): void {
-  ensureEl("mapLayers").replaceChildren(
-    ...Layers.all.flatMap(layer => {
+  const query = findEl<HTMLInputElement>("simpleLayerSearch")?.value.trim().toLowerCase() ?? "";
+  const renderedGroups = new Set<string>();
+  const items = Layers.all.flatMap(layer => {
       const button = LAYER_TOGGLES.get(layer.id);
       if (!button) return [];
+      const group = LAYER_GROUPS[layer.id] ?? "Other layers";
+      const label = button.label.replace(/<\/?.+?>/g, "");
+      if (query && !`${label} ${group}`.toLowerCase().includes(query)) return [];
+
+      const groupHeading =
+        !renderedGroups.has(group)
+          ? (() => {
+              renderedGroups.add(group);
+              const heading = document.createElement("li");
+              heading.className = "layer-group-heading";
+              heading.setAttribute("role", "heading");
+              heading.setAttribute("aria-level", "3");
+              heading.textContent = group;
+              return heading;
+            })()
+          : null;
 
       const item = document.createElement("li");
       item.dataset.layer = layer.id;
-      item.dataset.tip = `${button.label.replace(/<\/?u>/g, "")}: click to toggle, drag to raise or lower the layer. Ctrl + click to edit layer style`;
+      item.dataset.group = group;
+      item.dataset.tip = `${label}: click to toggle, drag to raise or lower the layer. Ctrl + click to edit layer style`;
       if (button.shortcut) item.dataset.shortcut = button.hint ?? button.shortcut.replace("Key", "");
       item.innerHTML = button.label;
+      item.setAttribute("role", "button");
+      item.setAttribute("tabindex", "0");
+      item.setAttribute("aria-label", `${label}, ${group}`);
+      item.setAttribute("aria-pressed", String(Layers.isOn(layer.id)));
       item.classList.toggle("buttonoff", !Layers.isOn(layer.id));
       item.classList.toggle("solid", layer.params.parent !== "viewbox"); // layers outside the viewbox cannot be reordered
-      return [item];
-    })
-  );
+      return groupHeading ? [groupHeading, item] : [item];
+    });
+
+  ensureEl("mapLayers").replaceChildren(...items);
 }
 
 ensureEl("mapLayers").addEventListener("click", event => {
@@ -75,14 +133,25 @@ ensureEl("mapLayers").addEventListener("click", event => {
   Layers.toggle(id);
 });
 
+ensureEl("mapLayers").addEventListener("keydown", event => {
+  if (!(event instanceof KeyboardEvent) || !["Enter", " "].includes(event.key)) return;
+  const layer = (event.target as HTMLElement).closest("li[data-layer]") as HTMLElement | null;
+  const id = layer?.dataset.layer;
+  if (!id || !Layers.has(id)) return;
+  event.preventDefault();
+  Layers.toggle(id);
+});
+
+findEl<HTMLInputElement>("simpleLayerSearch")?.addEventListener("input", render);
+
 // move layers on mapLayers dragging. TODO: deprecate jQuery
 $("#mapLayers").sortable({
-  items: "li:not(.solid)",
+  items: "li[data-layer]:not(.solid)",
   containment: "parent",
   cancel: ".solid",
   update: (_event: Event, ui: { item: any }) => {
     const id = ui.item.data("layer");
-    const before = ui.item.next().data("layer");
+    const before = ui.item.nextAll("li[data-layer]").first().data("layer");
     const thisLayer = Layers.has(id) ? id : undefined;
     const beforeLayer = Layers.has(before) ? before : undefined;
     if (thisLayer) Layers.move(thisLayer, beforeLayer);
