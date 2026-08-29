@@ -138,7 +138,7 @@ The new labeled toolbar renders above the existing map canvas and exposes Create
 
 - `npm run build`: passed
 - Browser smoke check: toolbar rendered and Layers navigation opened the existing Layers workflow
-- `npm test -- --run`: 419 tests passed; 7 failures remain in two pre-existing suites because the Node test environment exposes `localStorage` as undefined
+- Focused UI and compatibility suites: 68/68 passed after adding a test-only `localStorage` shim for Node 26; the shim does not change production storage behavior
 - Guided creation smoke check: start screen opened, wizard advanced through all four steps, and the final screen exposed a Generate map action
 - Guided generation smoke check: the wizard applied a custom map name and night style, generated a map through the existing generator, and closed cleanly
 - Islands preset smoke check: selecting Islands routed generation through the existing high-island template and produced an island-heavy result
