@@ -1432,6 +1432,49 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   border-color: #8fb8d3;
 }
 
+.simple-help-guide {
+  margin-bottom: 0.9em;
+  padding: 0.85em;
+  background: var(--simple-surface-muted, #f4f7fa);
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 8px;
+  font-family: var(--sans-serif);
+}
+
+.simple-help-guide h3 {
+  margin: 0.1em 0 0;
+  color: var(--simple-text, #24313d);
+  font-size: 1.05rem;
+}
+
+.simple-help-guide ol {
+  padding-left: 1.25em;
+  margin: 0.7em 0;
+}
+
+.simple-help-guide li + li {
+  margin-top: 0.35em;
+}
+
+.simple-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 0.8em;
+  color: var(--simple-text-muted, #5d6b78);
+  font-size: 0.8rem;
+}
+
+.simple-shortcuts kbd {
+  padding: 0.12em 0.35em;
+  color: var(--simple-text, #24313d);
+  background: #ffffff;
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-family: var(--sans-serif);
+  font-size: 0.75rem;
+}
+
 .simple-export-choices button:focus-visible,
 .simple-advanced-export summary:focus-visible {
   outline: 2px solid var(--simple-focus, #2f6f9f);
