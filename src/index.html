@@ -495,6 +495,23 @@
           </div>
         </div>
         <div id="styleContent" class="tabcontent">
+          <div class="simple-style-controls" aria-label="Quick style presets">
+            <div>
+              <p class="simple-eyebrow">Quick styles</p>
+              <h3>Choose a visual direction</h3>
+              <p class="simple-help-text">Start with a preset. You can fine-tune every element in Advanced styling.</p>
+            </div>
+            <div class="simple-style-presets" role="group" aria-label="Style presets">
+              <button type="button" data-simple-style-preset="default" aria-pressed="true"><strong>Classic</strong><span>Balanced and familiar</span></button>
+              <button type="button" data-simple-style-preset="ancient" aria-pressed="false"><strong>Ancient</strong><span>Warm parchment tones</span></button>
+              <button type="button" data-simple-style-preset="watercolor" aria-pressed="false"><strong>Watercolor</strong><span>Soft hand-painted feel</span></button>
+              <button type="button" data-simple-style-preset="clean" aria-pressed="false"><strong>Clean</strong><span>Clear modern contrast</span></button>
+              <button type="button" data-simple-style-preset="darkSeas" aria-pressed="false"><strong>Dark seas</strong><span>Deep ocean presentation</span></button>
+              <button type="button" data-simple-style-preset="night" aria-pressed="false"><strong>Night</strong><span>Low-light fantasy mood</span></button>
+            </div>
+          </div>
+          <details class="simple-advanced-style">
+            <summary>Advanced styling controls</summary>
           <p
             data-tip="Select a style preset. State labels may required regeneration if font is changed"
             style="display: inline-block"
@@ -1306,6 +1323,7 @@
             <button id="dingy" class="radio">Dingy</button>
             <button id="tint" class="radio">Tint</button>
           </div>
+          </details>
         </div>
         <div id="optionsContent" class="tabcontent">
           <p data-tip="Map generation settings. Generate a new map to apply the settings">

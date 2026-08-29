@@ -84,6 +84,34 @@ function initializeToolFilters(): void {
   apply();
 }
 
+function initializeStylePresets(): void {
+  const select = findEl<HTMLSelectElement>("stylePreset");
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-simple-style-preset]");
+  if (!select || !buttons.length) return;
+
+  const updateActive = (preset: string): void => {
+    buttons.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.simpleStylePreset === preset)));
+  };
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const preset = button.dataset.simpleStylePreset;
+      if (!preset || !Array.from(select.options).some(option => option.value === preset)) {
+        announce("This style preset is not available");
+        return;
+      }
+      select.value = preset;
+      const requestChange = (window as unknown as { requestStylePresetChange?: (value: string) => void }).requestStylePresetChange;
+      requestChange?.(preset);
+      updateActive(preset);
+      announce(`${button.textContent?.trim() ?? "Style"} selected`);
+    });
+  });
+
+  select.addEventListener("change", () => updateActive(select.value));
+  updateActive(select.value || "default");
+}
+
 function openLegacyTab(tabId: LegacyTabId): void {
   const options = findEl<HTMLElement>("options");
   const trigger = findEl<HTMLButtonElement>("optionsTrigger");
@@ -390,6 +418,7 @@ function initialize(): void {
   });
 
   initializeToolFilters();
+  initializeStylePresets();
 
   ensureEl("simpleToolbar").addEventListener("keydown", event => {
     if (event.key !== "Escape") return;

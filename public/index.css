@@ -1304,6 +1304,82 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   margin: 0.16em 0.12em;
 }
 
+.simple-style-controls {
+  margin: 0 0 0.8em;
+  padding: 0.85em;
+  background: var(--simple-surface-muted, #f4f7fa);
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 8px;
+  font-family: var(--sans-serif);
+}
+
+.simple-style-controls h3 {
+  margin: 0.1em 0 0;
+  color: var(--simple-text, #24313d);
+  font-size: 1.05rem;
+}
+
+.simple-style-controls .simple-help-text {
+  margin: 0.35em 0 0;
+}
+
+.simple-style-presets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 0.8em;
+}
+
+.simple-style-presets button {
+  display: grid;
+  gap: 3px;
+  min-height: 58px;
+  padding: 0.55em 0.6em;
+  color: var(--simple-text, #24313d);
+  background: #ffffff;
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 7px;
+  font-family: var(--sans-serif);
+  text-align: left;
+}
+
+.simple-style-presets button span {
+  color: var(--simple-text-muted, #5d6b78);
+  font-size: 0.74rem;
+}
+
+.simple-style-presets button[aria-pressed="true"],
+.simple-style-presets button:hover {
+  background: #e6f1f8;
+  border-color: #8fb8d3;
+}
+
+.simple-style-presets button:focus-visible,
+.simple-advanced-style summary:focus-visible {
+  outline: 2px solid var(--simple-focus, #2f6f9f);
+  outline-offset: 2px;
+}
+
+.simple-advanced-style {
+  margin-top: 0.8em;
+  font-family: var(--sans-serif);
+}
+
+.simple-advanced-style summary {
+  display: inline-block;
+  padding: 0.45em 0.7em;
+  color: var(--simple-accent-hover, #245a82);
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.simple-advanced-style[open] summary {
+  margin-bottom: 0.6em;
+  background: var(--simple-surface-muted, #f4f7fa);
+}
+
 #mapLayers {
   display: inline-block;
   padding: 0;
@@ -1327,6 +1403,12 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   border: 1px solid var(--dark-solid);
   border-radius: 4px;
   font-family: var(--sans-serif) !important;
+}
+
+@media (max-width: 640px) {
+  .simple-style-presets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .simple-layer-search input:focus-visible,
