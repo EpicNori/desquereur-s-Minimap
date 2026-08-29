@@ -132,6 +132,13 @@ Inputs:
 - Preserve user input when moving between wizard steps.
 - Show progress for operations that take longer than 400ms.
 
+Simple workspace patterns:
+
+- Tool panels start with a search field and task filters: Terrain, World, Labels, Decorations, and Analysis.
+- Filters narrow the existing controls without removing the Advanced workflow or changing the generator APIs.
+- Layer lists use one-time group headings, visible search, and semantic pressed states for keyboard users.
+- Keep the original layer order when grouping is only a visual aid; drag-and-drop ordering remains authoritative.
+
 ## Navigation and terminology
 
 Preferred wording:
@@ -191,4 +198,3 @@ Focus must use a 2px high-contrast ring and must never rely on color alone.
 - Preserve existing generators and renderers during the first UI migration.
 - Existing advanced functionality must remain accessible.
 - API keys and user data must never be written to source control or transmitted without an explicit user action.
-

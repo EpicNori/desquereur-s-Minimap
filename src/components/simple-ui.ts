@@ -35,6 +35,55 @@ const SECTION_LABELS: Record<SimpleSection, string> = {
   "save-export": "Save & Export"
 };
 
+const TOOL_CATEGORIES: Record<string, string[]> = {
+  terrain: ["editBiomesButton", "editCoastlineSettings", "editHeightmapButton", "overviewRiversButton", "regenerateIce", "regenerateReliefIcons", "regenerateRivers", "addRiver"],
+  world: ["editCulturesButton", "editDiplomacyButton", "editGoods", "editNamesBaseButton", "editProvincesButton", "editReligions", "editStatesButton", "editUnitsButton", "editZonesButton", "regenerateBurgs", "regenerateCultures", "regenerateEconomy", "regenerateGoods", "regenerateMarkets", "regenerateMilitary", "regeneratePopulation", "regenerateProduction", "regenerateProvinces", "regenerateReligions", "regenerateStates", "regenerateZones"],
+  labels: ["overviewLabelsButton", "editNamesBaseButton", "regenerateStateLabels", "addLabel"],
+  decorations: ["editEmblemButton", "overviewMarkersButton", "overviewMilitaryButton", "regenerateEmblems", "regenerateMarkers", "regenerateMilitary", "addBurgTool", "addMarker", "addRoute", "openSubmapTool"],
+  analysis: ["overviewBurgsButton", "overviewMarketsButton", "editMeasurersButton", "editNotesButton", "overviewCellsButton", "overviewChartsButton", "overviewRoutesButton", "openMinimapButton", "openTransformTool", "editTradeAnimationButton"]
+};
+
+function updateToolVisibility(activeCategory = "all"): void {
+  const tools = findEl<HTMLElement>("toolsContent");
+  if (!tools) return;
+  const query = findEl<HTMLInputElement>("simpleToolSearch")?.value.trim().toLowerCase() ?? "";
+  const categoryIds = activeCategory === "all" ? undefined : new Set(TOOL_CATEGORIES[activeCategory] ?? []);
+  const grids = new Set<HTMLElement>();
+
+  tools.querySelectorAll<HTMLButtonElement>(".grid button").forEach(button => {
+    const matchesCategory = !categoryIds || categoryIds.has(button.id);
+    const matchesQuery = !query || button.textContent?.toLowerCase().includes(query) || button.dataset.tip?.toLowerCase().includes(query);
+    button.hidden = !(matchesCategory && Boolean(matchesQuery));
+    const grid = button.closest<HTMLElement>(".grid");
+    if (grid) grids.add(grid);
+  });
+  grids.forEach(grid => {
+    grid.hidden = !grid.querySelector("button:not([hidden])");
+  });
+}
+
+function initializeToolFilters(): void {
+  const search = findEl<HTMLInputElement>("simpleToolSearch");
+  const filters = document.querySelectorAll<HTMLButtonElement>("[data-simple-tool-filter]");
+  let activeCategory = "all";
+  const apply = (): void => updateToolVisibility(activeCategory);
+
+  search?.addEventListener("input", apply);
+  filters.forEach(button => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.simpleToolFilter ?? "all";
+      filters.forEach(filter => {
+        const active = filter === button;
+        filter.classList.toggle("active", active);
+        filter.setAttribute("aria-pressed", String(active));
+      });
+      apply();
+      announce(`${button.textContent?.trim() ?? "All"} tools shown`);
+    });
+  });
+  apply();
+}
+
 function openLegacyTab(tabId: LegacyTabId): void {
   const options = findEl<HTMLElement>("options");
   const trigger = findEl<HTMLButtonElement>("optionsTrigger");
@@ -339,6 +388,8 @@ function initialize(): void {
   document.querySelectorAll<HTMLButtonElement>("[data-simple-start]").forEach(button => {
     button.addEventListener("click", () => handleStartAction(button.dataset.simpleStart as SimpleStartAction));
   });
+
+  initializeToolFilters();
 
   ensureEl("simpleToolbar").addEventListener("keydown", event => {
     if (event.key !== "Escape") return;

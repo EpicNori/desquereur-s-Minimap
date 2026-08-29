@@ -1235,6 +1235,70 @@ input[type="color"]::-webkit-color-swatch-wrapper {
   margin: 0.2em 0;
 }
 
+.simple-tool-controls {
+  margin: 0 0 0.8em;
+  padding: 0.7em;
+  background: var(--simple-surface-muted, #f4f7fa);
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 8px;
+  font-family: var(--sans-serif);
+}
+
+.simple-tool-search {
+  display: grid;
+  gap: 4px;
+}
+
+.simple-tool-search label {
+  color: var(--simple-text-muted, #5d6b78);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.simple-tool-search input {
+  min-height: 2.2em;
+  padding: 0.35em 0.5em;
+  background: #ffffff;
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 4px;
+  font-family: var(--sans-serif) !important;
+}
+
+.simple-tool-search input:focus-visible,
+.simple-tool-filters button:focus-visible {
+  outline: 2px solid var(--simple-focus, #2f6f9f);
+  outline-offset: 2px;
+}
+
+.simple-tool-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 0.55em;
+}
+
+.simple-tool-filters button {
+  padding: 0.3em 0.7em;
+  color: var(--simple-text-muted, #5d6b78);
+  background: #ffffff;
+  border: 1px solid var(--simple-border, #c8d3df);
+  border-radius: 999px;
+  font-family: var(--sans-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.simple-tool-filters button.active,
+.simple-tool-filters button:hover {
+  color: var(--simple-accent-hover, #245a82);
+  background: #e6f1f8;
+  border-color: #b3d1e4;
+}
+
+.simple-tool-controls .simple-help-text {
+  margin: 0.6em 0 0;
+}
+
 #toolsContent button {
   padding: 0.35em 0;
   margin: 0.16em 0.12em;

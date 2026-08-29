@@ -1779,6 +1779,21 @@
           </div>
         </div>
         <div id="toolsContent" class="tabcontent">
+          <div class="simple-tool-controls" aria-label="Find tools by task">
+            <div class="simple-tool-search">
+              <label for="simpleToolSearch">Find a tool</label>
+              <input id="simpleToolSearch" type="search" placeholder="Search tools" autocomplete="off" />
+            </div>
+            <div class="simple-tool-filters" role="group" aria-label="Tool categories">
+              <button type="button" class="active" data-simple-tool-filter="all" aria-pressed="true">All</button>
+              <button type="button" data-simple-tool-filter="terrain" aria-pressed="false">Terrain</button>
+              <button type="button" data-simple-tool-filter="world" aria-pressed="false">World</button>
+              <button type="button" data-simple-tool-filter="labels" aria-pressed="false">Labels</button>
+              <button type="button" data-simple-tool-filter="decorations" aria-pressed="false">Decorations</button>
+              <button type="button" data-simple-tool-filter="analysis" aria-pressed="false">Analysis</button>
+            </div>
+            <p class="simple-help-text">Choose a task to narrow the tools below. All original tools remain available.</p>
+          </div>
           <div class="separator">Edit</div>
           <div class="grid">
             <button id="editBiomesButton" data-tip="Click to open Biomes Editor" data-shortcut="Shift + B">
